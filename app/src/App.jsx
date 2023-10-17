@@ -96,8 +96,8 @@ function App() {
             </div>
           ))}
         </div>
-        <div className="column">PROCESSING</div>
-        <div className="column">COMPLETED</div>
+        <div className="column"><h2>PROCESSING</h2></div>
+        <div className="column"><h2>COMPLETED</h2></div>
       </div>
     </div>
   );
