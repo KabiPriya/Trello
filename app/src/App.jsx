@@ -73,7 +73,7 @@ function App() {
   return (
     <div>
       <div className="heading">
-        <h1>Trello</h1>
+        <h1>TRELLO</h1>
       </div>
       <div className="app">
         <div className="columntodo" onDrop={() => handleDrop("TO DO")} onDragOver={(e) => e.preventDefault()}>
