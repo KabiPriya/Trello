@@ -1,5 +1,7 @@
 body{
-  background-color:peachpuff;
+  background: linear-gradient(to bottom, black, white);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
   /* Define the app grid layout */
@@ -12,22 +14,27 @@ body{
 
 /* Style the main title */
 .heading {
-  color: black;
+  color: white;
+  text-align: center;
 }
 
 /* Style the columns with borders */
 .columntodo {
- background-color:lightgray;
+ background-color:white;
+
 }
 .columnprocess{
-background-color:lightgray ;
+background-color:white ;
+
 }
 .columncomplete{
-  background-color: lightgrey;
+  background-color: white;
+ 
+  
 }
 /* Style the column titles */
 h2 {
-  color: white;
+  color: black;
   text-align: center;
   margin: 0;
   padding: 10px;
@@ -35,20 +42,21 @@ h2 {
 
 /* Style the "+" button */
 .add-button {
-  background:blue;
+  background: black;
   color: white;
   border: none;
   padding: 10px 10px;
   cursor: pointer;
   font-size: 24px;
   display: block;
-  margin: 0 auto;
+  margin-bottom: 100px;
+  margin-left: 50px;
 }
 
 /* Style the task input container when adding */
 .task.adding {
-  background:peachpuff;
-  border: 1px solid palegoldenrod;
+  background:black;
+  border: 1px solid white;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -59,14 +67,15 @@ h2 {
 .task.editing input {
   flex: 1;
   padding: 5px;
-  border: 1px solid palegoldenrod;
+  background-color: white;
+  border: 1px solid black;
 }
 
 /* Style the task buttons */
 .task button {
-  background: palegoldenrod;
+  background: black;
   color: white;
-  border: none;
+  border: 3px solid white;
   padding: 5px 10px;
   margin-left: 5px;
   cursor: pointer;
@@ -74,5 +83,5 @@ h2 {
 
 /* Change button color on hover */
 .task button:hover {
-  background: gold;
+  background: burlywood;
 }
