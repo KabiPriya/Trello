@@ -1,42 +1,69 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Define the app grid layout */
+.app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Style the main title */
+h1 {
+  color: palegoldenrod;
+}
+
+/* Style the columns with borders */
+.column {
+  border: 5px solid palegoldenrod;
+  height: 100vh;
+  padding: 10px;
+}
+
+/* Style the column titles */
+h2 {
+  color: palegoldenrod;
   text-align: center;
+  margin: 0;
+  padding: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Style the "+" button */
+.add-button {
+  background: palegoldenrod;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 24px;
+  display: block;
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Style the task input container when adding */
+.task.adding {
+  background: #f0f0f0;
+  border: 1px solid palegoldenrod;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.card {
-  padding: 2em;
+/* Style the input field during editing */
+.task.editing input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid palegoldenrod;
 }
 
-.read-the-docs {
-  color: #888;
+/* Style the task buttons */
+.task button {
+  background: palegoldenrod;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+/* Change button color on hover */
+.task button:hover {
+  background: gold;
 }
