@@ -1,24 +1,33 @@
-/* Define the app grid layout */
+body{
+  background-color:peachpuff;
+}
+
+  /* Define the app grid layout */
 .app {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  
 }
 
 /* Style the main title */
-h1 {
-  color: palegoldenrod;
+.heading {
+  color: black;
 }
 
 /* Style the columns with borders */
-.column {
-  border: 5px solid palegoldenrod;
-  height: 100vh;
-  padding: 10px;
+.columntodo {
+ background-color:lightgray;
 }
-
+.columnprocess{
+background-color:lightgray ;
+}
+.columncomplete{
+  background-color: lightgrey;
+}
 /* Style the column titles */
 h2 {
-  color: palegoldenrod;
+  color: white;
   text-align: center;
   margin: 0;
   padding: 10px;
@@ -26,10 +35,10 @@ h2 {
 
 /* Style the "+" button */
 .add-button {
-  background: palegoldenrod;
+  background:blue;
   color: white;
   border: none;
-  padding: 15px 25px;
+  padding: 10px 10px;
   cursor: pointer;
   font-size: 24px;
   display: block;
@@ -38,7 +47,7 @@ h2 {
 
 /* Style the task input container when adding */
 .task.adding {
-  background: #f0f0f0;
+  background:peachpuff;
   border: 1px solid palegoldenrod;
   padding: 10px;
   display: flex;

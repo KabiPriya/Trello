@@ -53,11 +53,11 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div className="heading">
         <h1>Trello</h1>
       </div>
       <div className="app">
-        <div className="column">
+        <div className="columntodo">
           <h2>TO DO</h2>
           {isAddingTask ? (
             <div className="task adding">
@@ -96,8 +96,8 @@ function App() {
             </div>
           ))}
         </div>
-        <div className="column"><h2>PROCESSING</h2></div>
-        <div className="column"><h2>COMPLETED</h2></div>
+        <div className="columnprocess"><h2>PROCESSING</h2></div>
+        <div className="columncomplete"><h2>COMPLETED</h2></div>
       </div>
     </div>
   );
