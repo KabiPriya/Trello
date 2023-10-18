@@ -2,7 +2,7 @@ const InProgress = () => {
     return (
       <>
         <div className="col-sm taskDiv">
-          <h2>In Progress</h2>
+          <h2>IN PROGRESS</h2>
         </div>
       </>
     );
