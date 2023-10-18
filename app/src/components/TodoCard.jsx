@@ -1,31 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TodoCard = (props) => {
   const { handleDelete, editContent, task } = props;
   const [content, setContent] = useState("");
-  const [isEdit, setIsedit] = useState(true);
+  const [isEdit, setIsEdit] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  const convertTime24_12 = (t) => {
-    let [h, ...rest] = t.split(":");
-    return (
-      (h == "12" ? "12" : h % 12) +
-      ":" +
-      rest.join(":") +
-      (h < 12 ? " AM" : " PM")
-    );
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // Update the time every second
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   function handleDeleteClick(taskId) {
     console.log(taskId);
     handleDelete(taskId);
   }
+
   function handleEditContent(id) {
     editContent(content, id);
-    setIsedit(false);
+    setIsEdit(false);
   }
 
   function enableEdit() {
-    setIsedit(false);
+    setIsEdit(false);
   }
+
+  const formattedTime = currentTime.toLocaleTimeString();
+
   return (
     <>
       <form className="list-group">
@@ -43,10 +49,7 @@ const TodoCard = (props) => {
           />
         </div>
         <div className="list-item time">
-          last updated
-          <time className="px-2">
-            {convertTime24_12(new Date().toLocaleTimeString())}
-          </time>
+          Last Updated: {formattedTime}
         </div>
       </form>
     </>

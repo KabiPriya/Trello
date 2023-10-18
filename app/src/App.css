@@ -29,12 +29,12 @@ button {
 .textarea:focus {
   outline: none;
 }
-/* Class components */
+
 .main-header {
   display: flex;
   align-items: center;
   height: 70px;
-  background-color: #1d2125;
+ 
 }
 .main-header h1 {
   margin-left: 24px;
@@ -60,7 +60,7 @@ button {
   padding: 10px 8px 8px 8px;
   background-color: #e4e3e4;
   color: #333;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 .task-header {
   padding: 8px;
