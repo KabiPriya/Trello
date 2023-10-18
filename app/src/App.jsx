@@ -1,142 +1,99 @@
-import React, { useReducer, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { useReducer, useEffect } from "react";
+import Todo from "./components/Todo";
 
-function taskReducer(state, action) {
-  switch (action.type) {
-    case "ADD_TASK":
-      return [...state, { text: action.text, isEditing: false }];
-    case "EDIT_TASK":
-      return state.map((task, index) => {
-        if (index === action.index) {
-          return { ...task, isEditing: true };
-        }
-        return task;
-      });
-    case "UPDATE_TASK":
-      return state.map((task, index) => {
-        if (index === action.index) {
-          return { ...task, text: action.text, isEditing: false };
-        }
-        return task;
-      });
-    case "DELETE_TASK":
-      return state.filter((_, index) => index !== action.index);
-    case "MOVE_TASK":
-      const movedTask = state[action.index];
-      return state.filter((_, index) => index !== action.index && !movedTask);
-    default:
-      return state;
-  }
+function getFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("My-Drello")) || [];
 }
 
 function App() {
-  const [todoItems, dispatch] = useReducer(taskReducer, []);
-  const [newTask, setNewTask] = useState("");
-  const [isAddingTask, setIsAddingTask] = useState(false);
-  const [draggedTask, setDraggedTask] = useState(null);
+  const [todos, dispatch] = useReducer(todoReducer, getFromLocalStorage());
 
-  const handleAddTask = () => {
-    if (newTask) {
-      dispatch({ type: "ADD_TASK", text: newTask });
-      setNewTask("");
-      setIsAddingTask(false);
+  useEffect(() => {
+    localStorage.setItem("My-Drello", JSON.stringify(todos));
+  }, [todos]);
+
+  function todoReducer(todos, action) {
+    switch (action.type) {
+      case "TODO_ADD": {
+        return [
+          ...todos,
+          {
+            id: new Date().getTime(),
+            text: action.value,
+            inSate: "todo",
+          },
+        ];
+      }
+      case "TODO_DELETE": {
+        const filtered = todos.filter((t) => t.id != action.value);
+        return [...filtered];
+      }
+
+      case "TODO_EDIT": {
+        const newTodos = [...todos];
+        const idx = newTodos.findIndex((nt) => nt.id === action.value.id);
+        if (idx !== -1) {
+          newTodos[idx]["text"] = action.value.text;
+        }
+        return newTodos;
+      }
+
+      default:
+        throw Error("Unknown action: " + action.type);
     }
-  };
+  }
 
-  const handleEditTask = (index) => {
-    dispatch({ type: "EDIT_TASK", index });
-  };
+  function handleAdd(text) {
+    dispatch({
+      type: "TODO_ADD",
+      value: text,
+    });
+  }
+  function handleEdit(text, id) {
+    dispatch({
+      type: "TODO_EDIT",
+      value: { text, id },
+    });
+  }
 
-  const handleUpdateTask = (index) => {
-    dispatch({ type: "UPDATE_TASK", index, text: newTask });
-  };
-
-  const handleDeleteTask = (index) => {
-    dispatch({ type: "DELETE_TASK", index });
-  };
-
-  const handleDragStart = (index) => {
-    setDraggedTask(index);
-  };
-
-  const handleDragEnd = () => {
-    setDraggedTask(null);
-  };
-
-  const handleDrop = (targetColumn) => {
-    if (draggedTask !== null) {
-      dispatch({ type: "MOVE_TASK", index: draggedTask, target: targetColumn });
-      setDraggedTask(null);
-    }
-  };
+  function handleDelete(id) {
+    dispatch({
+      type: "TODO_DELETE",
+      value: id,
+    });
+  }
 
   return (
     <div>
-      <div className="heading">
-        <h1>TRELLO</h1>
-      </div>
-      <div className="app">
-        <div className="columntodo" onDrop={() => handleDrop("TO DO")} onDragOver={(e) => e.preventDefault()}>
-          <h2>TO DO</h2>
-          {isAddingTask ? (
-            <div className="task adding">
-              <input
-                type="text"
-                placeholder="New Task"
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
-              />
-              <button onClick={handleAddTask}>Save</button>
-            </div>
-          ) : (
-            <button
-              className="add-button"
-              onClick={() => setIsAddingTask(true)}
-            >
-              +
-            </button>
-          )}
-          {todoItems.map((task, index) => (
-            <div
-              key={index}
-              className={`task ${task.isEditing ? "editing" : ""}`}
-              draggable
-              onDragStart={() => handleDragStart(index)}
-              onDragEnd={handleDragEnd}
-            >
-              {task.isEditing ? (
-                <input
-                  type="text"
-                  value={newTask}
-                  onChange={(e) => setNewTask(e.target.value)}
-                />
-              ) : (
-                task.text
-              )}
-              {task.isEditing ? (
-                <button onClick={() => handleUpdateTask(index)}>Update</button>
-              ) : (
-                <>
-                  <button onClick={() => handleEditTask(index)}>Edit</button>
-                  <button onClick={() => handleDeleteTask(index)}>Delete</button>
-                </>
-              )}
-            </div>
-          ))}
+      <header className="main-header">
+        <h1>Drello</h1>
+      </header>
+      <div className="container ">
+        <div className="list-wrapper">
+          <Todo
+            todos={todos}
+            handleAdd={handleAdd}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         </div>
-        <div
-          className="columnprocess"
-          onDrop={() => handleDrop("PROCESSING")}
-          onDragOver={(e) => e.preventDefault()}
-        >
-          <h2>PROCESSING</h2>
+
+        <div className="list-wrapper">
+          <div className="taskDiv">
+            <div className="task-header">
+              <h2>In Progress</h2>
+            </div>
+          </div>
         </div>
-        <div
-          className="columncomplete"
-          onDrop={() => handleDrop("COMPLETED")}
-          onDragOver={(e) => e.preventDefault()}
-        >
-          <h2>COMPLETED</h2>
+
+        <div className="list-wrapper">
+          <div className="taskDiv">
+            <div className="task-header">
+              <h2>Completed</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>
