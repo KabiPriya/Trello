@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
 import { useReducer, useEffect } from "react";
 import Todo from "./components/Todo";
