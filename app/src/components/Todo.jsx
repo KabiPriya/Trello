@@ -1,5 +1,5 @@
 import TodoCard from "./TodoCard";
-const Todo = ({ handleDelete, handleEdit, todos }) => {
+const Todo = ({ handleAdd, handleDelete, handleEdit, todos }) => {
   const updateAdd = (value, id) => {
     handleAdd(value, id);
   };
