@@ -66,7 +66,7 @@ function App() {
   }
 
   return (
-    <div>
+    
       <header className="main-header">
         <h1>Drello</h1>
       </header>
