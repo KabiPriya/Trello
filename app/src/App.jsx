@@ -31,7 +31,7 @@ function App() {
         return [...filtered];
       }
 
-      case": {
+      case "TODO_EDIT": {
         const newTodos = [...todos];
         const idx = newTodos.findIndex((nt) => nt.id === action.value.id);
         if (idx !== -1) {
