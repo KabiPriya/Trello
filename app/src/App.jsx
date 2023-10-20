@@ -88,9 +88,7 @@ function App() {
           </div>
         </div>
 
-        <div className="list-wrapper">
-          <div className="taskDiv">
-            <div className="task-header">
+     
               <h2>Completed</h2>
             </div>
           </div>
