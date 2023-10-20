@@ -41,7 +41,7 @@ function App() {
       }
 
       default:
-        throw Error("Unknown action: " + action.type);
+        throw Error("Unknown action: " + 
     }
   }
 
