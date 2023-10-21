@@ -40,10 +40,7 @@ function App() {
         return newTodos;
       }
 
-      default:
-        throw Error("Unknown action: " + action.type);
-    }
-  }
+     
 
   function handleAdd(text) {
     dispatch({
