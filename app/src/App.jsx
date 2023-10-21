@@ -31,14 +31,7 @@ function App() {
         return [...filtered];
       }
 
-      case "TODO_EDIT": {
-        const newTodos = [...todos];
-        const idx = newTodos.findIndex((nt) => nt.id === action.value.id);
-        if (idx !== -1) {
-          newTodos[idx]["text"] = action.value.text;
-        }
-        return newTodos;
-      }
+      
 
       default:
         throw Error("Unknown action: " + action.type);
